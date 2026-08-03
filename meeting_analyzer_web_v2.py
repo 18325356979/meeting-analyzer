@@ -36,15 +36,8 @@ st.set_page_config(
 )
 
 # ========== 中文字体设置 ==========
-system = platform.system()
-if system == 'Windows':
-    plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']
-elif system == 'Darwin':  # macOS
-    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei']
-else:  # Linux (Streamlit Cloud 服务器)
-    plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'WenQuanYi Zen Hei', 'SimHei']
-
-plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
+plt.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei', 'SimHei', 'Microsoft YaHei', 'DejaVu Sans']
+plt.rcParams['axes.unicode_minus'] = False
 plt.rcParams['figure.dpi'] = 120
 
 # ========== 历史数据管理 ==========
