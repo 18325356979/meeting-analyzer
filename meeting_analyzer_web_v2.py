@@ -16,12 +16,14 @@ import io
 import os
 import json
 import tempfile
+import platform
 from datetime import datetime
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
+import matplotlib
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -34,9 +36,16 @@ st.set_page_config(
 )
 
 # ========== 中文字体设置 ==========
+system = platform.system()
+if system == 'Windows':
+    plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']
+elif system == 'Darwin':  # macOS
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei']
+else:  # Linux (Streamlit Cloud 服务器)
+    plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'WenQuanYi Zen Hei', 'SimHei']
+
+plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 plt.rcParams['figure.dpi'] = 120
-plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'WenQuanYi Micro Hei']
-plt.rcParams['axes.unicode_minus'] = False
 
 # ========== 历史数据管理 ==========
 HISTORY_FILE = os.path.join(os.path.expanduser("~"), ".meeting_analyzer_history.json")
